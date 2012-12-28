@@ -1,4 +1,13 @@
+/**
+ * @file Sensor3204.cpp
+ * @author James Robson
+ * @copyright 2012, James Robson
+ * @class Sensor3204
+ */
+
 #include "Sensor3204.h"
+
+// Code based off of http://playground.arduino.cc/Code/MCP3208
 
 /**
 * Sensor Reader
@@ -26,8 +35,9 @@ int Sensor3204::read(int channel)
 
     //allow channel selection
     commandbits|((channel-1)<<3);
-    //digitalWrite(CS,HIGH);
-    digitalWrite(CS,LOW); //Select adc
+    
+    //Select adc
+    digitalWrite(CS,LOW);
     int i;
     // setup bits to be written
     for (i=7; i>=3; i--)
@@ -53,7 +63,6 @@ int Sensor3204::read(int channel)
         digitalWrite(CLK,LOW);
     }
     digitalWrite(CS, HIGH); //turn off device
-    //digitalWrite(CS,LOW);
     return adcvalue;
 }
 

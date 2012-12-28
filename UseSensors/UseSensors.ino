@@ -29,6 +29,7 @@ void setup(){}
 
 /**
  * Default arduino loop.
+ * @todo Smooth out the sensor results a little bit.
  */
 void loop()
 {
