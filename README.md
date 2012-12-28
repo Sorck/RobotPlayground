@@ -6,6 +6,7 @@ This is a bit of a sandbox for code for controlling robots from an Arduino. Alth
 Code Copyright 2012, James Robson
 
 Just copy the whole RobotPlayground directory structure into your sketchbook folder. Should look a bit like the following
+
 *Arduino/
 **libraries/
 ***QMotor/
