@@ -1,3 +1,10 @@
+/**
+ * @file Sensor3204.h
+ * @author James Robson
+ * @copyright 2012, James Robson
+ * @class Sensor3204
+ */
+
 #ifndef SENSOR3204_H
 
 #define SENSOR3204_H

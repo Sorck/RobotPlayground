@@ -1,3 +1,10 @@
+/**
+ * @file QMotor.h
+ * @author James Robson
+ * @copyright 2012, James Robson
+ * @class QMotor
+ */
+
 #ifndef QMOTOR_H
 #define QMOTOR_H
 

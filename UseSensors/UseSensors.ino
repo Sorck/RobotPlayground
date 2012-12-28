@@ -1,3 +1,9 @@
+/**
+ * @file UseSensors.ino
+ * @author James Robson
+ * @copyright 2012, James Robson
+ */
+
 // Load our sensor library
 #include "Sensor3204.h"
 // Load our motor library as well
@@ -10,15 +16,16 @@ int mostOff = 0;
 // Stores how far the sensor is from the mean.
 int offBy = 0;
 
+// Init the motor class.
 QMotor motors = QMotor(80);
+// Init the sensor class.
 Sensor3204 sensor = Sensor3204();
 
 /**
  * Does what it says on the tin, sets up the initial state of the system.
+ * Doesn't actually load anything though as nothing needs doing...
  */
-void setup()
-{
-}
+void setup(){}
 
 /**
  * Default arduino loop.
