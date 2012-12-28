@@ -7,16 +7,16 @@ Code Copyright 2012, James Robson
 
 Just copy the whole RobotPlayground directory structure into your sketchbook folder. Should look a bit like the following
 
- *Arduino/
- **libraries/
- ***QMotor/
- ****QMotor.cpp
- ****QMotot.h
- ***Sensor3204/
- ****Sensor3204.cpp
- ****Sensor3204.h
- **UseSensors/
- ***UseSensors.ino
+ * Arduino/
+ ** libraries/
+ ***  QMotor/
+ **** QMotor.cpp
+ **** QMotot.h
+ *** Sensor3204/
+ **** Sensor3204.cpp
+ **** Sensor3204.h
+ ** UseSensors/
+ *** UseSensors.ino
 
 (Obviously additional code will be added overtime and this list won't be maintained!)
 
