@@ -1,20 +1,3 @@
-void motor_init()
-{
-    //PWM Vars
-    duty = 80;
-	//PwmCnt = 0;
-	
-	// initialise the motor power pins
-	Quit();
-	
-	// Setup the PWM outputs
-	analogWrite(RightPwr, 0);
-	analogWrite(LeftPwr, 0);
-}
-
-// The duty on the PWM cycle
-int duty;
-
 // Right motor CW
 #define RightC 0
 // Right motor CCW
@@ -29,12 +12,30 @@ int duty;
 // Left motor go
 #define LeftPwr 2
 
+// Makes it easier to code CW and CCW movement
 #define CW 1
 #define CCW 0
 
+// The duty on the PWM cycle
+int duty;
+
+void motor_init()
+{
+    //PWM Vars
+    duty = 80;
+	
+	// initialise the motor power pins
+	Quit();
+	
+	// Setup the PWM outputs
+	analogWrite(RightPwr, 0);
+	analogWrite(LeftPwr, 0);
+}
+
+
 /**
 * void Quit
-* Kills the motor power. (H-bridge stopping trick courtesy of Mark)
+* Kills the motor power. (H-bridge stopping trick)
 */
 void Quit()
 {
@@ -55,7 +56,7 @@ void Forward()
 
 /**
 * void Left
-* Drives the bot Left.
+* Drives the bot Left. (on the spot rotation)
 */
 void Left()
 {
@@ -73,7 +74,7 @@ void Backward()
 
 /**
 * void Right
-* Drives the bot right.
+* Drives the bot right. (on the spot rotation)
 */
 void Right()
 {
@@ -81,49 +82,21 @@ void Right()
 }
 
 /**
-* Motor Driving functions
-*/
-
-/**
-* Drive
+* void Drive
 * @param int LeftDirection CW or CCW for left motor
 * @param int RightDirection CW or CCW for right motor
 */
 void Drive(int LeftDirection, int RightDirection)
 {
+    // Drive the Right Wheel
 	digitalWrite(RightC, RightDirection == CW ? HIGH : LOW);
 	digitalWrite(RightCC, RightDirection == CW ? LOW : HIGH);
 	
+    // Drive the Left Wheel
 	digitalWrite(LeftC, LeftDirection == CW ? HIGH : LOW);
 	digitalWrite(LeftCC, LeftDirection == CW ? LOW : HIGH);
-	
-	//PWM Vars
-	duty = 80;
 
+    // Send power to the wheels
 	analogWrite(RightPwr, duty);
 	analogWrite(LeftPwr, duty);
-	//DriveRLoop();
-	//DriveLLoop();
 }
-
-/*void DriveRLoop()
-{
-	PwmCnt = 0;
-	while(PwmCnt <= 20)
-	{
-		PwmCnt ++;
-		// @todo PWM RightPwr, duty
-		analogWrite(RightPwr, duty);
-	}
-}
-
-// do the pwm on the left motor
-void DriveLLoop()
-{
-	PwmCnt = 0;
-	while(PwmCnt <= 20)
-	{
-		PwmCnt ++;
-		// @todo PWM LeftPwr, duty
-	}
-}*/
