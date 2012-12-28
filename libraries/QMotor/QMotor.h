@@ -5,9 +5,11 @@
  * @class QMotor
  */
 
+// Inclusion guard.
 #ifndef QMOTOR_H
 #define QMOTOR_H
 
+// Two different versions of Arduino IDE need to be tested for...
 #if defined(ARDUINO) && ARDUINO >= 100
 #include "Arduino.h"
 #else
