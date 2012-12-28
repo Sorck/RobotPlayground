@@ -1,7 +1,7 @@
 // Load our sensor library
-#include "Sensor3204.c"
+#include "Sensor3204.h"
 // Load our motor library as well
-#include "Motor.c"
+#include "Motor.h"
 
 // Used for calculating mean averages.
 int mean = 0;
