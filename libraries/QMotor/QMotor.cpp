@@ -1,3 +1,10 @@
+/**
+ * @file QMotor.cpp
+ * @author James Robson
+ * @copyright 2012, James Robson
+ * @class QMotor
+ */
+
 #include "QMotor.h"
 
 // Right motor CW
@@ -18,6 +25,10 @@
 #define CW 1
 #define CCW 0
 
+/**
+ * Initialises the motors.
+ * @param int duty The PWM duty for the motors.
+ */
 QMotor::QMotor(int duty)
 {
     // private duty variable
@@ -33,7 +44,6 @@ QMotor::QMotor(int duty)
 
 
 /**
-* void Quit
 * Kills the motor power. (H-bridge stopping trick)
 */
 void QMotor::Quit()
@@ -45,7 +55,6 @@ void QMotor::Quit()
 }
 
 /**
-* void Forward
 * Drives the bot forward.
 */
 void QMotor::Forward()
@@ -54,7 +63,6 @@ void QMotor::Forward()
 }
 
 /**
-* void Left
 * Drives the bot Left. (on the spot rotation)
 */
 void QMotor::Left()
@@ -63,7 +71,6 @@ void QMotor::Left()
 }
 
 /**
-* void Backward
 * Drives the bot backward.
 */
 void QMotor::Backward()
@@ -72,7 +79,6 @@ void QMotor::Backward()
 }
 
 /**
-* void Right
 * Drives the bot right. (on the spot rotation)
 */
 void QMotor::Right()
@@ -81,7 +87,6 @@ void QMotor::Right()
 }
 
 /**
-* void Drive
 * @param int LeftDirection CW or CCW for left motor
 * @param int RightDirection CW or CCW for right motor
 */
