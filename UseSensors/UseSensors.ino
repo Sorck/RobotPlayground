@@ -16,6 +16,9 @@ int mostOff = 0;
 // Stores how far the sensor is from the mean.
 int offBy = 0;
 
+int** db;
+int next = 0;
+
 // Init the motor class.
 QMotor motors = QMotor(80);
 // Init the sensor class.
@@ -25,7 +28,44 @@ Sensor3204 sensor = Sensor3204();
  * Does what it says on the tin, sets up the initial state of the system.
  * Doesn't actually load anything though as nothing needs doing...
  */
-void setup(){}
+void setup()
+{
+  // Allocate some memory for our value pointers
+  db = (int**) malloc(4);
+  //void* db[0] = malloc(4);
+  for(int i = 0; i < 4; i++)
+  {
+    // Allocate memory for this set (i) of sensor values
+    db[i] = (int*) malloc(4);
+    // Give ourselves some sensor values to play with
+    db[i][0] = sensor.read(0);
+    db[i][1] = sensor.read(1);
+    db[i][2] = sensor.read(2);
+    db[i][3] = sensor.read(3);
+  }
+}
+
+// Calculate the mean of our array
+int* ArrayMean(int** array)
+{
+  // Prepare our return value
+  int* tr = (int*) malloc(4);
+  // A temp value used in working out the mean
+  int current_tot;
+  for(int i; i < 4; i++)
+  {
+    // Make sure our mean is clean
+    current_tot = 0;
+    for(int j; j < 4; j++)
+    {
+      current_tot += db[i][j];
+    }
+    // divide it up into 4 to get the mean
+    tr[i] = current_tot >> 2;
+  }
+  // Should be good enough for return
+  return tr;
+}
 
 /**
  * Default arduino loop.
@@ -33,9 +73,15 @@ void setup(){}
  */
 void loop()
 {
-	// Read the sensors
-    int sensor_results[4] = {sensor.read(0), sensor.read(1), sensor.read(2), sensor.read(3)};
-    
+    // Read the sensors
+    //int sensor_results[4] = {sensor.read(0), sensor.read(1), sensor.read(2), sensor.read(3)};
+    for(int i; i < 4; i++)
+        db[next][i] = (int) sensor.read(i);
+    next++;
+    if(next > 3)
+      next = 0;
+    // This should smooth out our results a bit...
+    int* sensor_results = ArrayMean(db);
 	// Calculate mean sensor value
 	// For every sensor we have...
 	for(int i=0; i<=3; i++)
