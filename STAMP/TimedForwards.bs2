@@ -36,18 +36,18 @@ GOTO setup        ' Unrecognized entry; try again.
 Fwd1:
     Length = 1
 	Number = 1000
-	GOTO jFwd
+	GOTO Fwd
 
 Fwd5:
 	Length = 1
 	Number = 5000
-	GOTO jFwd
+	GOTO Fwd
 
-jFwd:
+Fwd:
 	Number = Number - 1
 	PWM RightPwr, duty, Length
     PWM LeftPwr, duty, Length
-	IF number > 0 THEN jFwd
+	IF number > 0 THEN Fwd
 	GOTO setup
 
-END'!!!!!!!!!!!!!!!!!!!!
+END
