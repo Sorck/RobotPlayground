@@ -1,0 +1,53 @@
+' {$STAMP BS2}
+'Main Variables
+b96  CON  $54  ' Baudmode for 9600 bps.
+temp  VAR  Byte  ' Temporary variable used in several routines.
+
+duty VAR Byte
+Length VAR Byte
+Number VAR Word
+
+RightC CON 0 'Right Motor Clockwise
+RightCC CON 1 'Right Motor Anti-Clockwise
+RightPwr CON 2 'Right Motor Go
+
+LeftC CON 3 'Left Motor Clockwise
+LeftCC CON 4 'Left Motor Anti-Clockwise
+LeftPwr CON 5 'Left Motor Go
+
+setup:
+  'Menu
+  SEROUT 16,b96,["Prepare the rule for measuring..."]
+  SEROUT 16,b96,[CR,"Q - forward for approx 1s",CR]
+  SEROUT 16,b96,[CR,"W - forward for approx 5s",CR]
+  SERIN 16,b96,[temp]  ' Look for instruction.
+  LOW RightCC
+  HIGH RightC
+  LOW LeftCC
+  HIGH RightC
+  duty = 255
+
+  ' Sit in this loop waiting for commands.
+  temp = temp & $0DF      ' Convert to uppercase.
+  IF temp = "Q" THEN Fwd1
+  IF temp = "W" THEN Fwd5
+GOTO setup        ' Unrecognized entry; try again.
+
+Fwd1:
+    Length = 1
+	Number = 1000
+	GOTO jFwd
+
+Fwd5:
+	Length = 1
+	Number = 5000
+	GOTO jFwd
+
+jFwd:
+	Number = Number - 1
+	PWM RightPwr, duty, Length
+    PWM LeftPwr, duty, Length
+	IF number > 0 THEN jFwd
+	GOTO setup
+
+END'!!!!!!!!!!!!!!!!!!!!
